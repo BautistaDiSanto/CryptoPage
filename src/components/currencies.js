@@ -61,7 +61,7 @@ export const Currencies = (setId) => {
               <MarketCap>${v.market_cap.toLocaleString()}</MarketCap>
               <Volume>${v.total_volume.toLocaleString()}</Volume>
               <TotalSupply>
-                {v.circulating_supply}
+                {v.circulating_supply.toLocaleString()}
                 &nbsp;
                 {v.symbol}
               </TotalSupply>

@@ -7,16 +7,15 @@ import { useParams } from "react-router";
 
 export const Chart = () => {
   const { coinId } = useParams();
-  console.log(coinId);
   const { data, status } = CoinChart(coinId);
+  console.log("chart", data);
   if (status === "loading")
     return (
       <Container>
-        <ClipLoader size="150px" />
+        <ClipLoader color="white" size="150px" />
       </Container>
     );
   if (data) {
-    console.log(data.prices);
     const prices = data.prices.map((price) => ({
       date: new Date(price[0]).toLocaleString(),
       value: price[1],
@@ -46,10 +45,9 @@ export const Chart = () => {
 };
 
 const Container = styled.div`
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
+  height: 75vh;
+  width: 35rem;
 `;
