@@ -83,12 +83,6 @@ export const Header = (coinId) => {
   );
 };
 
-const center = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Button = styled.button`
   background-color: #2d3748;
   border: none;
