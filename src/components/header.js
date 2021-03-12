@@ -63,7 +63,7 @@ export const Header = (coinId) => {
           <Random>
             <FaExternalLinkAlt />
             <Link href={data.links.homepage[0]} target="parent">
-              {data.links.homepage[0].replace(/https?\:\/\/|www.|\//g, "")}
+              {data.links.homepage[0].replace(/https?\/\/|www.|\//g, "")}
             </Link>
           </Random>
         </FirstHalf>
