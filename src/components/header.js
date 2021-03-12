@@ -1,5 +1,4 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { GetCoinDetail } from "../API";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { FaExternalLinkAlt } from "react-icons/fa";
@@ -9,8 +8,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 export const Header = (coinId) => {
   const { data, status } = GetCoinDetail(coinId);
   console.log("header", data);
-  const changeValues = ["7d", "1m", "1y"];
-  const { value, setValue } = React.useState;
   if (status === "loading")
     return (
       <Container>
