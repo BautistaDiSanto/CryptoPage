@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { GetCoinDetail } from "../API";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import { FaExternalLinkAlt } from "react-icons/fa";
@@ -9,8 +9,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 export const Header = (coinId) => {
   const { data, status } = GetCoinDetail(coinId);
   console.log("header", data);
-  const changeValues = ["7d", "1m", "1y"];
-  const { value, setValue } = React.useState;
+  // const changeValues = ["7d", "1m", "1y"];
+  // const { value, setValue } = React.useState;
   if (status === "loading")
     return (
       <Container>
@@ -66,7 +66,7 @@ export const Header = (coinId) => {
           <Random>
             <FaExternalLinkAlt />
             <Link href={data.links.homepage[0]} target="parent">
-              {data.links.homepage[0].replace(/https?\:\/\/|www.|\//g, "")}
+              {data.links.homepage[0].replace(/https?:\/\/|www.|\//g, "")}
             </Link>
           </Random>
         </FirstHalf>
@@ -86,11 +86,11 @@ export const Header = (coinId) => {
   );
 };
 
-const center = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// const center = css`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
 const Button = styled.button`
   background-color: #2d3748;
