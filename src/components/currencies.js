@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { GetCoins } from "../API/index";
 import ClipLoader from "react-spinners/ClipLoader";
 
-export const Currencies = (setId) => {
+export const Currencies = () => {
   const { data, status } = GetCoins();
   const history = useHistory();
   console.log("CoinList", data);
@@ -35,13 +35,14 @@ export const Currencies = (setId) => {
         {data &&
           data.length &&
           data.map((v, index) => (
-            <Li key={v.id}>
+            <Li
+              key={v.id}
+              onClick={() => {
+                history.push(`/currencies/${v.id}`);
+              }}
+            >
               <Rank style={{ color: "gray" }}>#{index + 1}</Rank>
-              <Name
-                onClick={() => {
-                  history.push(`/currencies/${v.id}`);
-                }}
-              >
+              <Name>
                 <Icon src={v.image} />
                 <CoinName>{v.name}</CoinName>
                 <CoinSymbol>{v.symbol}</CoinSymbol>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { GetCoinDetail } from "../API";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
@@ -8,9 +9,10 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 export const Header = (coinId) => {
   const { data, status } = GetCoinDetail(coinId);
+  const history = useHistory();
+  const change = "";
   console.log("header", data);
-  // const changeValues = ["7d", "1m", "1y"];
-  // const { value, setValue } = React.useState;
+  //price_change_percentage_14d_in_currency, price_change_percentage_30d_in_currency, price_change_percentage_60d_in_currency,price_change_percentage_200d_in_currency
   if (status === "loading")
     return (
       <Container>
@@ -21,8 +23,12 @@ export const Header = (coinId) => {
     <Container>
       <Top>
         <FirstHalf>
-          <Path>
-            cryptocurrencies {">"} {data.name}
+          <Path
+            onClick={() => {
+              history.push(`/currencies`);
+            }}
+          >
+            <Back>cryptocurrencies</Back> {">"} {data.name}
           </Path>
         </FirstHalf>
         <SecondHalf>
@@ -77,38 +83,69 @@ export const Header = (coinId) => {
             )}
             %
           </Change24>
-          <Button>
-            change <BiChevronDown />
-          </Button>
+          <DropDown change={change} />
         </SecondHalf>
       </Bottom>
     </Container>
   );
 };
 
-// const center = css`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `;
-
-const Button = styled.button`
-  background-color: #2d3748;
-  border: none;
-  border-radius: 0.2rem;
-  outline: none;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 5rem;
-  height: 1.5rem;
-  margin-right: 1rem;
-  :hover {
-    cursor: pointer;
-    transform: scale(1.1);
-  }
-`;
+const DropDown = (change) => {
+  const [time, setTime] = React.useState("1 w");
+  change = time;
+  return (
+    <DropDownLi>
+      <Button>
+        <p style={{ fontWeight: "bolder" }}> {time}</p>
+        <DownIcon />
+      </Button>
+      <DropDownContent>
+        <Row
+          onClick={() => {
+            setTime("1 w");
+          }}
+        >
+          1 w
+        </Row>
+        <Row
+          onClick={() => {
+            setTime("2 w");
+          }}
+        >
+          2 w
+        </Row>
+        <Row
+          onClick={() => {
+            setTime("1 m");
+          }}
+        >
+          1 m
+        </Row>
+        <Row
+          onClick={() => {
+            setTime("2 m");
+          }}
+        >
+          2 m
+        </Row>
+        <Row
+          onClick={() => {
+            setTime("6 m");
+          }}
+        >
+          6 m
+        </Row>
+        <Row
+          onClick={() => {
+            setTime("1 y");
+          }}
+        >
+          1 y
+        </Row>
+      </DropDownContent>
+    </DropDownLi>
+  );
+};
 
 const Container = styled.div`
   color: white;
@@ -127,10 +164,21 @@ const Top = styled.div`
   justify-content: space-between;
 `;
 
-const Path = styled.p`
+const Path = styled.a`
   margin-left: 0.5rem;
   font-size: 0.8rem;
   color: grey;
+`;
+
+const Back = styled.button`
+  color: inherit;
+  background-color: inherit;
+  border-style: none;
+  outline: none;
+  :hover {
+    font-weight: bolder;
+    cursor: pointer;
+  }
 `;
 
 const TopPrice = styled.p`
@@ -218,4 +266,60 @@ const Link = styled.a`
   color: inherit;
   text-decoration: none;
   margin-left: 0.3rem;
+`;
+
+const StyledLi = styled.li`
+  height: fit-content;
+  width: fit-content;
+`;
+
+const Button = styled.button`
+  background-color: #2d3748;
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  min-width: 4.5rem;
+  width: fit-content;
+  height: 1.5rem;
+  margin-right: 1rem;
+  :hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;
+
+const DropDownContent = styled.div`
+  display: none;
+  position: absolute;
+  min-width: 5rem;
+  z-index: 1;
+`;
+
+const DropDownLi = styled(StyledLi)`
+  display: inline-block;
+  &:hover ${DropDownContent} {
+    display: block;
+  }
+`;
+
+const Row = styled.a`
+  display: inline-block;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  background-color: #011627;
+  padding: 0.5rem;
+  :hover {
+    background-color: #2d3748;
+    cursor: pointer;
+  }
+`;
+
+const DownIcon = styled(BiChevronDown)`
+  height: 1.3rem;
+  width: 1.3rem;
 `;
