@@ -1,3 +1,6 @@
+This project is based on the CoinGecko API, made with react.js, react-router, react-query, and styled components.
+In the next months i will be adding pagination, finishing the coin detail page, and options for sorting the acoin list.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
