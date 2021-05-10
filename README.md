@@ -1,4 +1,5 @@
 page: cryptopage.vercel.app/currencies
+
 This project is based on the CoinGecko API, made with react.js, react-router, react-query, and styled components.
 In the next months i will be adding pagination, finishing the coin detail page, creating a home and options for sorting the coin list.
 
